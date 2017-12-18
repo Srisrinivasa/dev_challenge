@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    <!--
+    This is the library that provides websocket streaming pub/sub
+    The dev serverver is serving the html and javascript, but it also provides updating fx data on /fx/prices.
+     -->
+    <script src="stomp.js"></script>
+    <script src="sparkline.js"></script>
+</head>
+
+<body>
+
+    <!-- This is a description of what you should do for this task.  You can remove it for your answer -->
+    <section>
+        <h2>Updating Bid table</h2>
+
+        <table id="updatingTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Current best ask price</th>
+                    <th>Current best bid price</th>
+                    <th>Best ask last changed</th>
+                    <th>Best bid last changed</th>
+                    <th>Open Ask Price</th>
+                    <th>Open Bid Price</th>
+                    <th>Sparkline</th>
+                </tr>
+            </thead>
+            <tbody id="table-body" />
+        </table>
+
+        <div>
+            <h4>
+                Work flow Description: -
+            </h4>
+            <h5>Steps followed for fetching table data</h5>
+            <p>
+                After subscribing to <code>/fx/prices</code>, I am able to get data continously. Then filtered the raw data
+                to find unique names. Grouped the data with same names, then filtered to get the bestLastChangedBid of each
+                name. Then sorted the data and displayed as table body which updates on every 5 seconds.
+            </p>
+            <h5>Steps followed for generating Sparkline</h5>
+            <p>
+                From the raw data found out the midpoints. All the points having same name are grouped and stored in an array.<br/>                Then generated the sparkline by filtering the latest points and displayed in last column of the table
+            </p>
+        </div>
+        <h4>
+            Points to be noted: -
+        </h4>
+        <p>
+            <ul>
+                <li>
+                    For better understanding of work flow, entire javascript code was written in <code>index.js</code> file
+                    only
+                </li>
+                <li>
+                    Commented each line to the best of my knowledge
+                </li>
+                <li>
+                    Not applied any CSS
+                </li>
+            </ul>
+        </p>
+        <h4>
+            Suggestions: -
+        </h4>
+        <p>
+            <ul>
+                <li>
+                    Same assignment can be done in better and efficient way using React and Redux
+                </li>
+                <li>
+                    React concept is meant to render the individual components, so we can generate and manage sparkline seperately.
+                </li>
+                <li>
+                    Also instead of setInterval we can just watch for an update and display data using react component life cycle methods.
+                </li>
+            </ul>
+        </p>
+    </section>
+
+    <!-- Code you write in index.js and anything it depends on will be bundled into bundle.js and
+     is included here -->
+    <script src="bundle.js"></script>
+
+</body>
+
+</html>
